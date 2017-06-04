@@ -1,0 +1,10 @@
+.centerInDiv {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 600px;  
+}
+
+.fa-spin-custom {
+    font-size: 26px;
+    animation-duration: 1.5s;
+}
