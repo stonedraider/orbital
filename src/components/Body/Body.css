@@ -1,7 +1,7 @@
-.Body {
-    /*background-color: rgba(1,1,1,0.02);*/
+.Body {    
     flex: 1;
-    background: orange;
+    /*background: rgba(1,1,1,0.15);*/
+    background: black;
 }
 
 .divTop {
@@ -14,8 +14,64 @@
     color: #333;
 }
 
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+    color: white
+}
+
 img {
-  margin-left:auto;
-  margin-right:auto;
-  width: 600px;
+    margin-left:auto;
+    margin-right:auto;
+    max-width:100%;
+    max-height:100%;
+}
+
+hr {
+    border-top: 1px solid rgba(0,0,0,0.15);
+    margin: 30px 80px 30px 80px;
+}
+
+.divSliderImage {
+    float: left;
+    width: 70%;
+}
+
+.divSliderItemInfo {
+    float: right;
+    width: 30%;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 25px;
+    color: white;
+}
+
+.divDownloadButton {
+}
+
+.divClearFloat {
+    clear: both;
+    height: 50px;
+}
+
+@media (max-width: 1980px) {
+    .divSliderItemInfo {
+        display: none;
+    }
+    .divSliderImage {
+        width: 100%;
+    }
+    .divSlider {
+        padding: 30px;
+    }
+    hr {
+        display: none;
+    }
+    .divTop {
+        padding-top: 10px;
+    }
+    iframe {
+        width: auto;
+        height: auto;
+        min-width: 600px;
+        min-height: 450px;
+    }
 }

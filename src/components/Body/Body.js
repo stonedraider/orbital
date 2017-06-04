@@ -4,6 +4,7 @@ import Button from '../Button'
 import Loading from '../Loading'
 import './Body.css';
 import apod_2017_01_01 from '../../img/apod_2017_01_01.jpg'
+// import space_background_001 from '../../img/space_background_001.jpg'
 //GET https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2017-01-01
 
 const PATH_BASE = 'https://api.nasa.gov/planetary/apod';
@@ -17,8 +18,85 @@ const VALUE_API_KEY = 'Yxi6hdd2U4X9odDq25r8ppGeeKz0I8zkFV8GiQU0';
 const VALUE_DATE = '2017-01-01';
 const VALUE_HD = 'false';
 
-function SliderComponent ({ url }) {
-  return (<div><img src={url}></img></div>)
+const DECREMENT_INIT_DAY = 1;
+const FETCH_SIZE = 10;
+
+function SliderItemInfo({ url, date, title, explanation }) {
+  const explanationMin = explanation;//.substring(0, 20);
+  return (
+    <div className="divSliderItemInfo">
+      <br></br>
+      <h4>Date</h4>
+      {date}
+      <hr></hr>
+      <h4>Title</h4>
+      {title}
+      <hr></hr>
+      <h4>Description</h4>
+      {explanation}
+      <hr></hr>
+      <div className="divDownloadButton">
+        <a
+          className="btn btn-default active" role="button"
+          download=""
+          href={url}
+          title="Download">
+          Download
+            </a>
+      </div>
+    </div>
+  );
+}
+
+class SliderItem extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      media_type: null,
+      url: "",
+      date: null,
+      title: "",
+      explanation: ""
+    }
+  }
+
+  render() {
+    const {
+      media_type,
+      url,
+      date,
+      title,
+      explanation
+    } = this.props;
+
+    return (
+      <div>
+        {media_type === "video"
+          ?
+          <iframe width="800" height="600" src={url} frameBorder="0"></iframe>
+          :
+          <div className="row">
+            <div className="col-xs-1"></div>
+            <div className="col-xs-10">
+              <div className="divSliderImage">
+                <img src={url}></img>
+              </div>
+              <SliderItemInfo
+                url={url}
+                date={date}
+                title={title}
+                explanation={explanation}            >
+              </SliderItemInfo>
+              <div className="divClearFloat"></div>
+            </div>
+            <div className="col-xs-1"></div>
+          </div>
+        }
+      </div>
+    )
+  }
 }
 
 class Body extends Component {
@@ -30,7 +108,7 @@ class Body extends Component {
     this.state = {
       isLoading: false,
       results: null,
-      currentDate: new Date(date.setDate(date.getDate() - 1))
+      currentDate: new Date(date.setDate(date.getDate() - DECREMENT_INIT_DAY))
     }
 
     this.fetchApod = this.fetchApod.bind(this);
@@ -54,21 +132,30 @@ class Body extends Component {
       <div className="Body">
         <div className="divTop">
           <Button
-            className="btn-default"
+            className="btn btn-default active"
             onClick={() => this.fetchNextData()}
           >
             Load APOD
           </Button>
         </div>
+        <hr></hr>
         <div className="divSlider">
           <Slider {...settings}>
-              {isLoading
-                ? <div><Loading className="fa fa-spinner fa-spin fa-spin-custom centerInDiv" /></div>
-                : results ?
-                  results.map(item => 
-                    <div><img src={item.url}></img></div>                  
-                  ) : <div></div>
-              }
+            {
+              results ?
+                results.map(item =>
+                  <div key={item.date}>
+                    <SliderItem
+                      media_type={item.media_type}
+                      url={item.url}
+                      date={item.date}
+                      title={item.title}
+                      explanation={item.explanation}
+                    >
+                    </SliderItem>
+                  </div>
+                ) : <div></div>
+            }
           </Slider>
         </div>
       </div >
@@ -80,8 +167,10 @@ class Body extends Component {
   }
 
   fetchNextData() {
-    this.decrementDate();
-    this.fetchApod(this.formatDate(this.state.currentDate));
+    for (let i = 0; i < FETCH_SIZE; i++) {
+      this.decrementDate();
+      this.fetchApod(this.formatDate(this.state.currentDate));
+    }
   }
 
   fetchApod(date) {
