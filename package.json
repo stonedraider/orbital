@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "reactcss": "^1.2.2"
   },
   "devDependencies": {
+    "react-css-modules": "^4.3.0",
     "react-scripts": "1.0.7",
     "react-slick": "^0.14.11",
     "react-test-renderer": "^15.5.4",

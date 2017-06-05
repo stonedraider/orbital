@@ -10,57 +10,59 @@
 
 .divSlider {
     margin: 0 auto;
-    padding: 50px;
+    padding: 0 50px 0 50px;
     color: #333;
 }
 
+.slick-dots {
+    bottom: -60px;
+}
 .slick-dots li button:before,
 .slick-dots li.slick-active button:before {
-    color: white
+    color: white !important;
+}
+.slick-initialized .slick-slide {
+    margin: 0 10px 0 10px;
 }
 
 img {
-    margin-left:auto;
-    margin-right:auto;
-    max-width:100%;
-    max-height:100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
 }
 
 hr {
-    border-top: 1px solid rgba(0,0,0,0.15);
-    margin: 30px 80px 30px 80px;
+    border-top: 1px solid rgba(255,255,255,1);
+    margin: 12px 80px 12px 80px;
 }
 
 .divSliderImage {
-    float: left;
-    width: 70%;
 }
 
 .divSliderItemInfo {
-    float: right;
-    width: 30%;
+    height: 240px;
     border: 1px solid rgba(0,0,0,0.15);
-    padding: 25px;
+    padding: 0 0 25px 0;
     color: white;
 }
 
 .divDownloadButton {
+    padding-top: 20px;
 }
 
-.divClearFloat {
-    clear: both;
-    height: 50px;
+iframe {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
 }
 
-@media (max-width: 1980px) {
+/*@media (max-width: 1980px) {
     .divSliderItemInfo {
         display: none;
     }
     .divSliderImage {
         width: 100%;
-    }
-    .divSlider {
-        padding: 30px;
     }
     hr {
         display: none;
@@ -74,4 +76,4 @@ hr {
         min-width: 600px;
         min-height: 450px;
     }
-}
+}*/

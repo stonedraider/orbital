@@ -18,8 +18,8 @@ const VALUE_API_KEY = 'Yxi6hdd2U4X9odDq25r8ppGeeKz0I8zkFV8GiQU0';
 const VALUE_DATE = '2017-01-01';
 const VALUE_HD = 'false';
 
-const DECREMENT_INIT_DAY = 1;
-const FETCH_SIZE = 10;
+const DECREMENT_INIT_DAY = 100;
+const FETCH_SIZE = 50;
 
 function SliderItemInfo({ url, date, title, explanation }) {
   const explanationMin = explanation;//.substring(0, 20);
@@ -28,13 +28,10 @@ function SliderItemInfo({ url, date, title, explanation }) {
       <br></br>
       <h4>Date</h4>
       {date}
-      <hr></hr>
       <h4>Title</h4>
       {title}
-      <hr></hr>
-      <h4>Description</h4>
-      {explanation}
-      <hr></hr>
+      {/*<h4>Description</h4>*/}
+      {/*{explanation}*/}
       <div className="divDownloadButton">
         <a
           className="btn btn-default active" role="button"
@@ -73,25 +70,20 @@ class SliderItem extends Component {
 
     return (
       <div>
+        <SliderItemInfo
+          url={url}
+          date={date}
+          title={title}
+          explanation={explanation}            >
+        </SliderItemInfo>
         {media_type === "video"
           ?
           <iframe width="800" height="600" src={url} frameBorder="0"></iframe>
           :
-          <div className="row">
-            <div className="col-xs-1"></div>
-            <div className="col-xs-10">
-              <div className="divSliderImage">
-                <img src={url}></img>
-              </div>
-              <SliderItemInfo
-                url={url}
-                date={date}
-                title={title}
-                explanation={explanation}            >
-              </SliderItemInfo>
-              <div className="divClearFloat"></div>
+          <div>
+            <div className="divSliderImage">
+              <img src={url}></img>
             </div>
-            <div className="col-xs-1"></div>
           </div>
         }
       </div>
@@ -100,6 +92,7 @@ class SliderItem extends Component {
 }
 
 class Body extends Component {
+
   constructor(props) {
     super(props);
 
@@ -118,12 +111,18 @@ class Body extends Component {
     const {
       isLoading,
       results,
-      currentDay
+      currentDay,
+      onSwitchStyle
     } = this.state;
 
     var settings = {
       dots: true,
-      useCSS: true
+      useCSS: true,
+      infinite: false,
+      slidesToShow: 5,
+      slidesToScroll: 2,
+      draggable: true,
+      speed: 50
     };
 
     console.log(this.state);
@@ -147,7 +146,7 @@ class Body extends Component {
                   <div key={item.date}>
                     <SliderItem
                       media_type={item.media_type}
-                      url={item.url}
+                      url={item.hdurl}
                       date={item.date}
                       title={item.title}
                       explanation={item.explanation}
