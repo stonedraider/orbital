@@ -19,7 +19,7 @@ const VALUE_DATE = '2017-01-01';
 const VALUE_HD = 'false';
 
 const DECREMENT_INIT_DAY = 100;
-const FETCH_SIZE = 50;
+const FETCH_SIZE = 25;
 
 function SliderItemInfo({ url, date, title, explanation }) {
   const explanationMin = explanation;//.substring(0, 20);
@@ -146,7 +146,7 @@ class Body extends Component {
                   <div key={item.date}>
                     <SliderItem
                       media_type={item.media_type}
-                      url={item.hdurl}
+                      url={item.url}
                       date={item.date}
                       title={item.title}
                       explanation={item.explanation}
