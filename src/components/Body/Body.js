@@ -18,11 +18,11 @@ const VALUE_API_KEY = 'Yxi6hdd2U4X9odDq25r8ppGeeKz0I8zkFV8GiQU0';
 const VALUE_DATE = '2017-01-01';
 const VALUE_HD = 'false';
 
-const DECREMENT_INIT_DAY = 100;
-const FETCH_SIZE = 25;
+const DAYS = 3;
+const FETCH_SIZE = 50;
 
 function SliderItemInfo({ url, date, title, explanation }) {
-  const explanationMin = explanation;//.substring(0, 20);
+  const explanationMin = explanation;
   return (
     <div className="divSliderItemInfo">
       <br></br>
@@ -30,8 +30,6 @@ function SliderItemInfo({ url, date, title, explanation }) {
       {date}
       <h4>Title</h4>
       {title}
-      {/*<h4>Description</h4>*/}
-      {/*{explanation}*/}
       <div className="divDownloadButton">
         <a
           className="btn btn-default active" role="button"
@@ -74,7 +72,8 @@ class SliderItem extends Component {
           url={url}
           date={date}
           title={title}
-          explanation={explanation}            >
+          explanation={explanation}
+        >
         </SliderItemInfo>
         {media_type === "video"
           ?
@@ -101,7 +100,7 @@ class Body extends Component {
     this.state = {
       isLoading: false,
       results: null,
-      currentDate: new Date(date.setDate(date.getDate() - DECREMENT_INIT_DAY))
+      currentDate: new Date(date.setDate(date.getDate() - DAYS))
     }
 
     this.fetchApod = this.fetchApod.bind(this);
